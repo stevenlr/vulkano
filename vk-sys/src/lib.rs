@@ -2901,6 +2901,9 @@ ptrs!(InstancePointers, {
     GetPhysicalDeviceQueueFamilyProperties2KHR => (physicalDevice: PhysicalDevice, pQueueFamilyPropertiesCount: *mut u32, pQueueFamilyProperties: *mut QueueFamilyProperties2KHR) -> (),
     GetPhysicalDeviceMemoryProperties2KHR => (physicalDevice: PhysicalDevice, pMemoryProperties: *mut PhysicalDeviceMemoryProperties2KHR) -> (),
     GetPhysicalDeviceSparseImageFormatProperties2KHR => (physicalDevice: PhysicalDevice, pFormatInfo: *const PhysicalDeviceSparseImageFormatInfo2KHR, pPropertyCount: *mut u32, pProperties: *mut SparseImageFormatProperties2KHR) -> (),
+    CreateDebugUtilsMessengerEXT => (instance: Instance, pCreateInfo: *const DebugUtilsMessengerCreateInfoEXT, pAllocator: *const AllocationCallbacks, pMessenger: *mut DebugUtilsMessengerEXT) -> Result,
+    SubmitDebugUtilsMessageEXT => (instance: Instance, messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT, messageTypes: DebugUtilsMessageTypeFlagsEXT, pCallbackData: *const DebugUtilsMessengerCallbackDataEXT) -> (),
+    DestroyDebugUtilsMessengerEXT => (instance: Instance, messenger: DebugUtilsMessengerEXT, pAllocator: *const AllocationCallbacks) -> (),
 });
 
 ptrs!(DevicePointers, {
@@ -3051,7 +3054,4 @@ ptrs!(DevicePointers, {
     CmdBeginDebugUtilsLabelEXT => (commandBuffer: CommandBuffer, pLabelInfo: *const DebugUtilsLabelEXT) -> (),
     CmdEndDebugUtilsLabelEXT => (commandBuffer: CommandBuffer) -> (),
     CmdInsertDebugUtilsLabelEXT => (commandBuffer: CommandBuffer, pLabelInfo: *const DebugUtilsLabelEXT) -> (),
-    CreateDebugUtilsMessengerEXT => (instance: Instance, pCreateInfo: *const DebugUtilsMessengerCreateInfoEXT, pAllocator: *const AllocationCallbacks, pMessenger: *mut DebugUtilsMessengerEXT) -> Result,
-    SubmitDebugUtilsMessageEXT => (instance: Instance, messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT, messageTypes: DebugUtilsMessageTypeFlagsEXT, pCallbackData: *const DebugUtilsMessengerCallbackDataEXT) -> (),
-    DestroyDebugUtilsMessengerEXT => (instance: Instance, messenger: DebugUtilsMessengerEXT, pAllocator: *const AllocationCallbacks) -> (),
 });
