@@ -58,6 +58,7 @@ pub type DisplayKHR = u64;
 pub type DisplayModeKHR = u64;
 pub type DebugReportCallbackEXT = u64;
 pub type DescriptorUpdateTemplateKHR = u64;
+pub type DebugUtilsMessengerEXT = u64;
 
 pub const LOD_CLAMP_NONE: f32 = 1000.0;
 pub const REMAINING_MIP_LEVELS: u32 = 0xffffffff;
@@ -193,6 +194,11 @@ pub const STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR: u32 = 100014600
 pub const STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT: u32 = 1000022000;
 pub const STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT: u32 = 1000022001;
 pub const STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT: u32 = 1000022002;
+pub const STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT: u32 = 1000128000;
+pub const STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT: u32 = 1000128001;
+pub const STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT: u32 = 1000128002;
+pub const STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT: u32 = 1000128003;
+pub const STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT: u32 = 1000128004;
 
 pub type SystemAllocationScope = u32;
 pub const SYSTEM_ALLOCATION_SCOPE_COMMAND: u32 = 0;
@@ -1024,6 +1030,19 @@ pub const DEBUG_REPORT_ERROR_BIT_EXT: u32 = 0x00000008;
 pub const DEBUG_REPORT_DEBUG_BIT_EXT: u32 = 0x00000010;
 pub type DebugReportFlagsEXT = Flags;
 
+pub type DebugUtilsMessageSeverityFlagBitsEXT = u32;
+pub const DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT: u32 = 0x00000001;
+pub const DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT: u32 = 0x00000010;
+pub const DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT: u32 = 0x00000100;
+pub const DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT: u32 = 0x00001000;
+pub type DebugUtilsMessageSeverityFlagsEXT = Flags;
+
+pub type DebugUtilsMessageTypeFlagBitsEXT = u32;
+pub const DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT: u32 = 0x00000001;
+pub const DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT: u32 = 0x00000002;
+pub const DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT: u32 = 0x00000004;
+pub type DebugUtilsMessageTypeFlagsEXT = Flags;
+
 pub type MacOSSurfaceCreateFlagsMVK = u32;
 
 pub type IOSSurfaceCreateFlagsMVK = u32;
@@ -1039,12 +1058,58 @@ pub const DESCRIPTOR_UPDATE_TEMPLATE_TYPE_END_RANGE_KHR: u32 = DESCRIPTOR_UPDATE
 pub const DESCRIPTOR_UPDATE_TEMPLATE_TYPE_RANGE_SIZE_KHR: u32 = (DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR - DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR + 1);
 pub type DescriptorUpdateTemplateCreateFlagsKHR = Flags;
 
+pub type DebugUtilsMessengerCreateFlagsEXT = Flags;
+pub type DebugUtilsMessengerCallbackDataFlagsEXT = Flags;
+
+pub type ObjectType = u32;
+pub const OBJECT_TYPE_UNKNOWN: u32 = 0;
+pub const OBJECT_TYPE_INSTANCE: u32 = 1;
+pub const OBJECT_TYPE_PHYSICAL_DEVICE: u32 = 2;
+pub const OBJECT_TYPE_DEVICE: u32 = 3;
+pub const OBJECT_TYPE_QUEUE: u32 = 4;
+pub const OBJECT_TYPE_SEMAPHORE: u32 = 5;
+pub const OBJECT_TYPE_COMMAND_BUFFER: u32 = 6;
+pub const OBJECT_TYPE_FENCE: u32 = 7;
+pub const OBJECT_TYPE_DEVICE_MEMORY: u32 = 8;
+pub const OBJECT_TYPE_BUFFER: u32 = 9;
+pub const OBJECT_TYPE_IMAGE: u32 = 10;
+pub const OBJECT_TYPE_EVENT: u32 = 11;
+pub const OBJECT_TYPE_QUERY_POOL: u32 = 12;
+pub const OBJECT_TYPE_BUFFER_VIEW: u32 = 13;
+pub const OBJECT_TYPE_IMAGE_VIEW: u32 = 14;
+pub const OBJECT_TYPE_SHADER_MODULE: u32 = 15;
+pub const OBJECT_TYPE_PIPELINE_CACHE: u32 = 16;
+pub const OBJECT_TYPE_PIPELINE_LAYOUT: u32 = 17;
+pub const OBJECT_TYPE_RENDER_PASS: u32 = 18;
+pub const OBJECT_TYPE_PIPELINE: u32 = 19;
+pub const OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT: u32 = 20;
+pub const OBJECT_TYPE_SAMPLER: u32 = 21;
+pub const OBJECT_TYPE_DESCRIPTOR_POOL: u32 = 22;
+pub const OBJECT_TYPE_DESCRIPTOR_SET: u32 = 23;
+pub const OBJECT_TYPE_FRAMEBUFFER: u32 = 24;
+pub const OBJECT_TYPE_COMMAND_POOL: u32 = 25;
+pub const OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION: u32 = 1000156000;
+pub const OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE: u32 = 1000085000;
+pub const OBJECT_TYPE_SURFACE_KHR: u32 = 1000000000;
+pub const OBJECT_TYPE_SWAPCHAIN_KHR: u32 = 1000001000;
+pub const OBJECT_TYPE_DISPLAY_KHR: u32 = 1000002000;
+pub const OBJECT_TYPE_DISPLAY_MODE_KHR: u32 = 1000002001;
+pub const OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT: u32 = 1000011000;
+pub const OBJECT_TYPE_OBJECT_TABLE_NVX: u32 = 1000086000;
+pub const OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX: u32 = 1000086001;
+pub const OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT: u32 = 1000128000;
+pub const OBJECT_TYPE_VALIDATION_CACHE_EXT: u32 = 1000160000;
+pub const OBJECT_TYPE_ACCELERATION_STRUCTURE_NVX: u32 = 1000165000;
+pub const OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR: u32 = OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE;
+pub const OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR: u32 = OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION;
+
 pub type PFN_vkAllocationFunction = extern "system" fn(*mut c_void, usize, usize, SystemAllocationScope) -> *mut c_void;
 pub type PFN_vkReallocationFunction = extern "system" fn(*mut c_void, *mut c_void, usize, usize, SystemAllocationScope) -> *mut c_void;
 pub type PFN_vkFreeFunction = extern "system" fn(*mut c_void, *mut c_void);
 pub type PFN_vkInternalAllocationNotification = extern "system" fn(*mut c_void, usize, InternalAllocationType, SystemAllocationScope) -> *mut c_void;
 pub type PFN_vkInternalFreeNotification = extern "system" fn(*mut c_void, usize, InternalAllocationType, SystemAllocationScope) -> *mut c_void;
 pub type PFN_vkDebugReportCallbackEXT = extern "system" fn(DebugReportFlagsEXT, DebugReportObjectTypeEXT, u64, usize, i32, *const c_char, *const c_char, *mut c_void) -> Bool32;
+pub type PFN_vkDebugUtilsMessengerCallbackEXT = extern "system" fn(DebugUtilsMessageSeverityFlagBitsEXT, DebugUtilsMessageTypeFlagsEXT, *const DebugUtilsMessengerCallbackDataEXT, *mut c_void) -> Bool32;
 
 pub type PFN_vkVoidFunction = extern "system" fn() -> ();
 
@@ -2672,6 +2737,61 @@ pub struct DebugMarkerMarkerInfoEXT {
     pub color: [f32; 4],
 }
 
+#[repr(C)]
+pub struct DebugUtilsObjectNameInfoEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub objectType: ObjectType,
+    pub objectHandle: u64,
+    pub pObjectName: *const c_char,
+}
+
+#[repr(C)]
+pub struct DebugUtilsObjectTagInfoEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub objectType: ObjectType,
+    pub objectHandle: u64,
+    pub tagName: u64,
+    pub tagSize: usize,
+    pub pTage: *const c_void,
+}
+
+#[repr(C)]
+pub struct DebugUtilsLabelEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub pLabelName: *const c_char,
+    pub color: [f32; 4],
+}
+
+#[repr(C)]
+pub struct DebugUtilsMessengerCreateInfoEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: DebugUtilsMessengerCreateFlagsEXT,
+    pub messageSeverity: DebugUtilsMessageSeverityFlagsEXT,
+    pub messageType: DebugUtilsMessageTypeFlagsEXT,
+    pub pfnUserCallback: PFN_vkDebugUtilsMessengerCallbackEXT,
+    pub pUserData: *mut c_void,
+}
+
+#[repr(C)]
+pub struct DebugUtilsMessengerCallbackDataEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: DebugUtilsMessengerCallbackDataFlagsEXT,
+    pub pMessageIdName: *const c_char,
+    pub messageIdNumber: i32,
+    pub pMessage: *const c_char,
+    pub queueLabelCount: u32,
+    pub pQueueLabels: *mut DebugUtilsLabelEXT,
+    pub cmdBufLabelCount: u32,
+    pub pCmdBufLabels: *mut DebugUtilsLabelEXT,
+    pub objectCount: u32,
+    pub pObjects: *mut DebugUtilsObjectNameInfoEXT,
+}
+
 macro_rules! ptrs {
     ($struct_name:ident, { $($name:ident => ($($param_n:ident: $param_ty:ty),*) -> $ret:ty,)+ }) => (
         pub struct $struct_name {
@@ -2923,4 +3043,15 @@ ptrs!(DevicePointers, {
     CmdDebugMarkerBeginEXT => (commandBuffer: CommandBuffer, pMarkerInfo: *const DebugMarkerMarkerInfoEXT) -> (),
     CmdDebugMarkerEndEXT => (commandBuffer: CommandBuffer) -> (),
     CmdDebugMarkerInsertEXT => (commandBuffer: CommandBuffer, pMarkerInfo: *const DebugMarkerMarkerInfoEXT) -> (),
+    SetDebugUtilsObjectNameEXT => (device: Device, pNameInfo: *const DebugUtilsObjectNameInfoEXT) -> Result,
+    SetDebugUtilsObjectTagEXT => (device: Device, pTagInfo: *const DebugUtilsObjectTagInfoEXT) -> Result,
+    QueueBeginDebugUtilsLabelEXT => (queue: Queue, pLabelInfo: *const DebugUtilsLabelEXT) -> (),
+    QueueEndDebugUtilsLabelEXT => (queue: Queue) -> (),
+    QueueInsertDebugUtilsLabelEXT => (queue: Queue, pLabelInfo: *const DebugUtilsLabelEXT) -> (),
+    CmdBeginDebugUtilsLabelEXT => (commandBuffer: CommandBuffer, pLabelInfo: *const DebugUtilsLabelEXT) -> (),
+    CmdEndDebugUtilsLabelEXT => (commandBuffer: CommandBuffer) -> (),
+    CmdInsertDebugUtilsLabelEXT => (commandBuffer: CommandBuffer, pLabelInfo: *const DebugUtilsLabelEXT) -> (),
+    CreateDebugUtilsMessengerEXT => (instance: Instance, pCreateInfo: *const DebugUtilsMessengerCreateInfoEXT, pAllocator: *const AllocationCallbacks, pMessenger: *mut DebugUtilsMessengerEXT) -> Result,
+    SubmitDebugUtilsMessageEXT => (instance: Instance, messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT, messageTypes: DebugUtilsMessageTypeFlagsEXT, pCallbackData: *const DebugUtilsMessengerCallbackDataEXT) -> (),
+    DestroyDebugUtilsMessengerEXT => (instance: Instance, messenger: DebugUtilsMessengerEXT, pAllocator: *const AllocationCallbacks) -> (),
 });
